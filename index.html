@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Gastos Compartidos</title>
+<meta name="theme-color" content="#0f172a" />
+<link rel="manifest" href="manifest.json" />
+<link rel="apple-touch-icon" href="icons/icon-192.png" />
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<div id="app">
+
+  <!-- VISTA: LISTA DE GRUPOS -->
+  <section id="view-groups" class="view active">
+    <header class="topbar">
+      <h1>Mis grupos</h1>
+    </header>
+    <div id="groups-list" class="list"></div>
+    <div class="empty-state" id="groups-empty">
+      <p>Todavía no tienes grupos.</p>
+      <p class="muted">Crea uno para empezar a repartir gastos con tus amigos.</p>
+    </div>
+    <button class="fab" id="btn-new-group">+</button>
+  </section>
+
+  <!-- VISTA: DETALLE DE GRUPO -->
+  <section id="view-group" class="view">
+    <header class="topbar">
+      <button class="icon-btn" id="btn-back-group">←</button>
+      <h1 id="group-title">Grupo</h1>
+      <button class="icon-btn" id="btn-group-menu">⋮</button>
+    </header>
+
+    <div class="tabs">
+      <button class="tab active" data-tab="gastos">Gastos</button>
+      <button class="tab" data-tab="balance">Balance</button>
+      <button class="tab" data-tab="miembros">Miembros</button>
+    </div>
+
+    <div id="tab-gastos" class="tab-panel active">
+      <div id="expenses-list" class="list"></div>
+      <div class="empty-state" id="expenses-empty">
+        <p>Sin gastos registrados.</p>
+      </div>
+    </div>
+
+    <div id="tab-balance" class="tab-panel">
+      <div class="summary-card" id="total-summary"></div>
+      <h3 class="section-title">Cada quien gastó</h3>
+      <div id="balance-per-person" class="list"></div>
+      <h3 class="section-title">Pagos sugeridos</h3>
+      <div id="settlements-list" class="list"></div>
+      <div class="empty-state" id="settlements-empty">
+        <p>¡Todos están al día! 🎉</p>
+      </div>
+    </div>
+
+    <div id="tab-miembros" class="tab-panel">
+      <div id="members-list" class="list"></div>
+      <form id="form-add-member" class="inline-form">
+        <input type="text" id="input-member-name" placeholder="Nombre del amigo" required maxlength="30" />
+        <button type="submit">Agregar</button>
+      </form>
+    </div>
+
+    <button class="fab" id="btn-new-expense">+</button>
+  </section>
+
+</div>
+
+<!-- MODAL: NUEVO GRUPO -->
+<div id="modal-new-group" class="modal">
+  <div class="modal-card">
+    <h2>Nuevo grupo</h2>
+    <form id="form-new-group">
+      <label>Nombre del grupo</label>
+      <input type="text" id="input-group-name" placeholder="Ej: Asado del viernes" required maxlength="40" />
+      <label>Miembros (separados por coma)</label>
+      <input type="text" id="input-group-members" placeholder="Ej: Anghelo, Benjamín, Javier" required />
+      <div class="modal-actions">
+        <button type="button" class="btn-secondary" data-close-modal>Cancelar</button>
+        <button type="submit" class="btn-primary">Crear</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- MODAL: NUEVO GASTO -->
+<div id="modal-new-expense" class="modal">
+  <div class="modal-card">
+    <h2>Nuevo gasto</h2>
+    <form id="form-new-expense">
+      <label>¿Qué se compró?</label>
+      <input type="text" id="input-expense-desc" placeholder="Ej: Carbón y bebidas" required maxlength="60" />
+      <label>Monto total</label>
+      <input type="number" id="input-expense-amount" placeholder="0" min="0" step="1" required inputmode="numeric" />
+      <label>¿Quién pagó?</label>
+      <select id="select-expense-payer" required></select>
+      <label>¿Entre quiénes se divide?</label>
+      <div id="expense-participants" class="checkbox-list"></div>
+      <div class="modal-actions">
+        <button type="button" class="btn-secondary" data-close-modal>Cancelar</button>
+        <button type="submit" class="btn-primary">Guardar</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- MODAL: MENU DE GRUPO -->
+<div id="modal-group-menu" class="modal">
+  <div class="modal-card">
+    <h2 id="group-menu-title">Grupo</h2>
+    <button class="btn-danger full" id="btn-delete-group">Eliminar grupo</button>
+    <button class="btn-secondary full" data-close-modal>Cerrar</button>
+  </div>
+</div>
+
+<div id="toast" class="toast"></div>
+
+<script src="app.js"></script>
+</body>
+</html>

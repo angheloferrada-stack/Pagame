@@ -4,9 +4,10 @@ const ASSETS = [
   './index.html',
   './style.css',
   './app.js',
+  './firebase-config.js',
   './manifest.json',
-  './icons/icon-192.png',
-  './icons/icon-512.png'
+  './icon-192.png',
+  './icon-512.png'
 ];
 
 self.addEventListener('install', (event) => {
@@ -27,6 +28,10 @@ self.addEventListener('activate', (event) => {
 
 self.addEventListener('fetch', (event) => {
   if (event.request.method !== 'GET') return;
+  // Nunca cachear Firestore/Firebase: siempre necesitamos datos en vivo
+  if (event.request.url.includes('firestore.googleapis.com') || event.request.url.includes('googleapis.com')) {
+    return;
+  }
   event.respondWith(
     caches.match(event.request).then((cached) => {
       if (cached) return cached;

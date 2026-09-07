@@ -14,12 +14,12 @@
 // };
 
 const firebaseConfig = {
-  apiKey: "PEGA_AQUI_TU_API_KEY",
-  authDomain: "PEGA_AQUI.firebaseapp.com",
-  projectId: "PEGA_AQUI_TU_PROJECT_ID",
-  storageBucket: "PEGA_AQUI.appspot.com",
-  messagingSenderId: "PEGA_AQUI",
-  appId: "PEGA_AQUI"
+  apiKey: "AIzaSyD1t7ocR-b4d1Y7r7ku2gHkpV5V4ccASgE",
+  authDomain: "pagameapp-62e3c.firebaseapp.com",
+  projectId: "pagameapp-62e3c",
+  storageBucket: "pagameapp-62e3c.firebasestorage.app",
+  messagingSenderId: "76329030516",
+  appId: "1:76329030516:web:0fb79411926996cf439221"
 };
 
 firebase.initializeApp(firebaseConfig);

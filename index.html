@@ -8,6 +8,9 @@
 <link rel="manifest" href="manifest.json" />
 <link rel="apple-touch-icon" href="icons/icon-192.png" />
 <link rel="stylesheet" href="style.css" />
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="firebase-config.js"></script>
 </head>
 <body>
 
@@ -31,6 +34,7 @@
     <header class="topbar">
       <button class="icon-btn" id="btn-back-group">←</button>
       <h1 id="group-title">Grupo</h1>
+      <button class="icon-btn" id="btn-share-group" title="Compartir link">🔗</button>
       <button class="icon-btn" id="btn-group-menu">⋮</button>
     </header>
 
@@ -78,8 +82,9 @@
     <form id="form-new-group">
       <label>Nombre del grupo</label>
       <input type="text" id="input-group-name" placeholder="Ej: Asado del viernes" required maxlength="40" />
-      <label>Miembros (separados por coma)</label>
-      <input type="text" id="input-group-members" placeholder="Ej: Anghelo, Benjamín, Javier" required />
+      <label>Tu nombre</label>
+      <input type="text" id="input-group-my-name" placeholder="Ej: Anghelo" required maxlength="30" />
+      <p class="muted" style="margin:6px 0 0;">Después de crear el grupo, comparte el link para que tus amigos se unan solos.</p>
       <div class="modal-actions">
         <button type="button" class="btn-secondary" data-close-modal>Cancelar</button>
         <button type="submit" class="btn-primary">Crear</button>
@@ -115,6 +120,27 @@
     <h2 id="group-menu-title">Grupo</h2>
     <button class="btn-danger full" id="btn-delete-group">Eliminar grupo</button>
     <button class="btn-secondary full" data-close-modal>Cerrar</button>
+  </div>
+</div>
+
+<!-- MODAL: UNIRSE A GRUPO (viene de un link) -->
+<div id="modal-join-group" class="modal">
+  <div class="modal-card">
+    <h2 id="join-group-title">Unirte al grupo</h2>
+    <form id="form-join-group">
+      <label>¿Cuál es tu nombre?</label>
+      <input type="text" id="input-join-name" placeholder="Ej: Anghelo" required maxlength="30" />
+      <div class="modal-actions">
+        <button type="submit" class="btn-primary full">Entrar al grupo</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- OVERLAY: CARGANDO -->
+<div id="loading-overlay" class="modal">
+  <div class="modal-card" style="text-align:center;">
+    <p>Cargando grupo...</p>
   </div>
 </div>
 
